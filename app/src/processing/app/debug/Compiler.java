@@ -768,6 +768,14 @@ public class Compiler implements MessageConsumer {
     PreferencesMap dict = new PreferencesMap(prefs);
     dict.put("ide_version", "" + Base.REVISION);
 
+    String objectFileList = "";
+    for (File file : objectFiles)
+      objectFileList += " \"" + file.getAbsolutePath() + '"';
+    objectFileList = objectFileList.substring(1);
+
+    dict.put("archive_file", "core.a");
+    dict.put("object_files", objectFileList);
+
     String[] cmdArray;
     try {
       String cmd = prefs.get("recipe.objcopy.eep.pattern");
